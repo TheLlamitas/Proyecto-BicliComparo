@@ -1,13 +1,16 @@
 import React from 'react';
 import { View, Image, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 function MainHeader() {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor="#8B0000" />
+      <StatusBar barStyle="light-content" backgroundColor="black" />
       <View style={styles.container}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Inicio')}>
           <Image source={require('../assets/images/logoBC.png')} style={styles.logo} />
           </TouchableOpacity>
         <TouchableOpacity style={styles.searchIconContainer}>
@@ -25,7 +28,7 @@ function MainHeader() {
           <TouchableOpacity style={styles.icon}>
             <Icon name="star" size={20} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icon}>
+          <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Login')}>
             <Icon name="person" size={20} color="white" />
           </TouchableOpacity>
         </View>
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#8B0000', // Fondo de la barra principal
+    backgroundColor: '#8B0000',
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
@@ -53,7 +56,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
   },
   searchIconContainer: {
-    marginLeft: 20, // Espacio entre el logo y el icono de búsqueda
+    marginLeft: 20, 
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -65,14 +68,14 @@ const styles = StyleSheet.create({
     borderBottomColor: '#FFFFFF',
     borderBottomWidth: 1,
     paddingLeft: 5,
-    marginLeft: 1, // Espacio entre el icono de búsqueda y el input
+    marginLeft: 1,
   },
   iconContainer: {
     flexDirection: 'row',
-    marginLeft: 20, // Empuja los íconos hacia la derecha
+    marginLeft: 20, 
   },
   icon: {
-    marginLeft: 5, // Espacio entre los iconos
+    marginLeft: 5, 
   },
 });
 

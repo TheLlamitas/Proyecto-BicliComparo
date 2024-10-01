@@ -10,7 +10,7 @@ export default function Inicio() {
     return (
         <View style={styles.safeArea}>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
-                <MainHeader />
+                <MainHeader/>
                 <ImageCarousel />
                 <View style={styles.container}>
                     <Text style={styles.highlightedProducts}>Productos Destacados</Text>

@@ -1,7 +1,6 @@
 import *as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import Inicio from '../screens/Inicio';
 import Categorias from '../screens/Categorias';
 import Tiendas from '../screens/Tiendas';
