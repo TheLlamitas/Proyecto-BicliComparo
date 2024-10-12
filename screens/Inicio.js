@@ -11,8 +11,8 @@ export default function Inicio() {
         <View style={styles.safeArea}>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
                 <MainHeader/>
-                <ImageCarousel />
                 <View style={styles.container}>
+                <ImageCarousel />
                     <Text style={styles.highlightedProducts}>Productos Destacados</Text>
                     <View style={styles.line} />
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalScroll}>
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     highlightedProducts: {
         color: 'white',
         fontSize: 20,
+        paddingTop: 20,
         marginBottom: 10,
     },
     line: {
