@@ -40,9 +40,9 @@ Configuracion del axios
         Alert.alert("Login Error", "An error ocurred. Please try again");
         console.error(error);
     }
-}
+    }
 
-export async function login(email, password) {
-    return authenticate('signInWithPassword', email, password);
-}
+    export async function login(email, password) {
+        return authenticate('signInWithPassword', email, password);
+    }
 
