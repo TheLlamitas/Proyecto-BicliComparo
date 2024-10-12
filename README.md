@@ -13,12 +13,13 @@ Para ejecutarlo descargar las dependencias
     npm install react-native-snap-carousel
 
 Configuracion del axios
-import axios from "axios";
-import { Alert } from "react-native";
 
-const apiKey = 'SU Api Key de firebase';
+    import axios from "axios";
+    import { Alert } from "react-native";
 
-async function authenticate(mode, email, password) {
+    const apiKey = 'SU Api Key de firebase';
+
+    async function authenticate(mode, email, password) {
 
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
 
