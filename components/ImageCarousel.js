@@ -17,7 +17,9 @@ const ImageCarousel = () => {
                 style={styles.wrapper}
                 autoplay
                 autoplayTimeout={4}
-                showsPagination={false}
+                showsPagination={true}
+                dotStyle={styles.dot}
+                activeDotStyle={styles.activeDot}
             >
                 {images.map((image, index) => (
                     <View style={styles.slide} key={index}>
@@ -36,8 +38,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    wrapper: {
-    },
+    wrapper: {},
     slide: {
         width: '100%', 
         height: '100%', 
@@ -47,6 +48,20 @@ const styles = StyleSheet.create({
     image: {
         width: '95%',
         height: '100%', 
+    },
+    dot: {
+        backgroundColor: 'rgba(255, 255, 255, 0.5)', 
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        marginHorizontal: 3,
+    },
+    activeDot: {
+        backgroundColor: 'blue', 
+        width: 8,
+        height: 8,
+        borderRadius: 5,
+        marginHorizontal: 3,
     },
 });
 
