@@ -1,19 +1,20 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import MainHeader from "../components/MainHeader";
-import MenuMas from "../components/MenuMas";
+import ProfileLogin from "../components/ProfileLogin";
 
 const { width } = Dimensions.get('window');
 
-export default function Mas () {
+export default function Profile () {
+
     return (
         <View style={styles.safeArea}>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
                 <MainHeader />
                 <View style={styles.safeArea}>
-                    <Text style={styles.title}>Mas</Text>
+                    <Text style={styles.title}>Perfil</Text>
                     <View style={styles.line} />
-                    <MenuMas />
+                    <ProfileLogin />
                     <View style={styles.container}>
                         <Text style={styles.text}>Todos los derechos reservados 2024</Text>
                     </View>

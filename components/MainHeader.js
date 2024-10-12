@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Image, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
 function MainHeader() {
   const navigation = useNavigation();
+  const [searchVisible, setSeacrhVisisible] = useState(false);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -13,23 +14,24 @@ function MainHeader() {
         <TouchableOpacity onPress={() => navigation.navigate('Inicio')}>
           <Image source={require('../assets/images/logoBC.png')} style={styles.logo} />
           </TouchableOpacity>
-        <TouchableOpacity style={styles.searchIconContainer}>
-          <Icon name="search" size={15} color="white" />
-        </TouchableOpacity>
-        <TextInput
-          placeholder="Buscar..."
-          placeholderTextColor="white"
-          style={styles.input}
-        />
+          <View style={styles.searchContainer}>
+            {searchVisible && (
+              <TextInput
+                placeholder="Buscar..."
+                placeholderTextColor="white"
+                style={styles.input}
+              />
+            )}
+          </View>
         <View style={styles.iconContainer}>
+          <TouchableOpacity style={styles.icon} onPress={() => setSeacrhVisisible(!searchVisible)}>
+            <Icon name="search" size={20} color="white" />
+          </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
             <Icon name="notifications" size={20} color="white" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
             <Icon name="star" size={20} color="white" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.icon} onPress={() => navigation.navigate('Login')}>
-            <Icon name="person" size={20} color="white" />
           </TouchableOpacity>
         </View>
       </View>
@@ -39,40 +41,45 @@ function MainHeader() {
 
 const styles = StyleSheet.create({
   safeArea: {
-    backgroundColor: 'black', 
+    backgroundColor: 'darkred', 
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
     backgroundColor: '#8B0000',
     paddingVertical: 10,
     paddingHorizontal: 20,
+    width: '100%',
   },
   logo: {
+    alignItems: 'flex-start',
     width: 78,
     height: 73,
-    marginLeft: 0,
     borderRadius: 60,
   },
-  searchIconContainer: {
-    marginLeft: 20, 
+  searchContainer: {
+    flex: 1,
+    height: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
   input: {
-    width: 121,
-    height: 27,
-    backgroundColor: 'rgba(139, 0, 0, 0.7)',
-    color: '#FFFFFF',
-    borderBottomColor: '#FFFFFF',
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'darkred',
+    width: 100,
+    height: 10,
+    color: 'black',
+    borderBottomColor: 'white',
     borderBottomWidth: 1,
-    paddingLeft: 5,
-    marginLeft: 1,
+    marginHorizontal: 20,
+    paddingVertical: 0,
+    paddingHorizontal: 5,
+    textAlignVertical: 'center',
   },
   iconContainer: {
     flexDirection: 'row',
-    marginLeft: 20, 
+    justifyContent: 'flex-end',
   },
   icon: {
     marginLeft: 5, 
