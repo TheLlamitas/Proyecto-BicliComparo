@@ -3,14 +3,17 @@ import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import MainHeader from "../components/MainHeader";
 import ImageCarousel from "../components/ImageCarousel";
 import ProductList from "../components/ProductList"; // Asegúrate de que el nombre sea correcto
+import OffertList from "../components/OffertList";
+
 
 const { width } = Dimensions.get('window');
+
 
 export default function Inicio() {
     return (
         <View style={styles.safeArea}>
+            <MainHeader/>
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
-                <MainHeader/>
                 <View style={styles.container}>
                 <ImageCarousel />
                     <Text style={styles.highlightedProducts}>Productos Destacados</Text>
@@ -19,13 +22,18 @@ export default function Inicio() {
                         <ProductList />
                     </ScrollView>
                     <View style={styles.line} />
+                    <Text style={styles.highlightedProducts}>Nuevas Ofertas</Text>
+                    <View style={styles.line} />
+                    <OffertList />
                 </View>
+
 
                 <Text style={styles.text}>Todos los derechos reservados 2024</Text>
             </ScrollView>
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     safeArea: {
@@ -34,13 +42,13 @@ const styles = StyleSheet.create({
     },
     scrollViewContent: {
         flexGrow: 1,
-        justifyContent: 'flex-start', 
-        alignItems: 'center', 
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
     container: {
         flex: 1,
-        justifyContent: 'flex-start', 
-        alignItems: 'flex-start', 
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
         paddingVertical: 20,
         paddingHorizontal: 5,
     },
@@ -58,12 +66,12 @@ const styles = StyleSheet.create({
         marginVertical: 2,
     },
     horizontalScroll: {
-        alignItems: 'center', 
+        alignItems: 'center',
     },
     text: {
         color: 'white',
         fontSize: 15,
-        textAlign: 'center', 
+        textAlign: 'center',
         marginVertical: 20,
     },
 });
