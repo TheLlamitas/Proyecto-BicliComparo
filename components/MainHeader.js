@@ -31,7 +31,7 @@ function MainHeader() {
             <Icon name="notifications" size={20} color="white" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.icon}>
-            <Icon name="star" size={20} color="white" />
+            <Icon name="menu" size={20} color="white" />
           </TouchableOpacity>
         </View>
       </View>

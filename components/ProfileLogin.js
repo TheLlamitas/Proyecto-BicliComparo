@@ -4,15 +4,18 @@ import { AuthContext } from '../context/auth-context';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
+
 const menuOptions = [
   { name: 'Editar Perfil', icon: 'person', library: 'MaterialIcons' },
   { name: 'Historial', icon: 'book-open', library: 'FontAwesome5' },
-  { name: 'Guardados', icon: 'star', library: 'MaterialIcons' }
+  { name: 'Guardados', icon: 'bookmark', library: 'MaterialIcons' }
 ];
+
 
 function ProfileScreen() {
   const authCtx = useContext(AuthContext);
   const navigation = useNavigation();
+
 
   if (!authCtx.isLoggedIn) {
     return (
@@ -22,6 +25,7 @@ function ProfileScreen() {
       </View>
     );
   }
+
 
   return (
     <View style={styles.container}>
@@ -45,6 +49,7 @@ function ProfileScreen() {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -70,7 +75,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     borderBottomColor: 'white',
     borderBottomWidth: 1,
-    width: '100%', 
+    width: '100%',
   },
   icon: {
     marginRight: 15,
@@ -86,11 +91,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   logoutButton: {
-    backgroundColor: 'darkred', 
+    backgroundColor: 'darkred',
     paddingVertical: 10,
     marginTop: 20,
     borderRadius: 5,
-    width: '100%', 
+    width: '100%',
     alignItems: 'center',
   },
   logoutButtonText: {
@@ -99,5 +104,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
 
 export default ProfileScreen;
