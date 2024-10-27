@@ -54,7 +54,7 @@ export default function Prices() {
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.storeButton}>
                     <Text style={styles.storeButtonText}>Ir a la tienda</Text>
-                        <Image source={require('../assets/images/BikeHouse.png')}
+                        <Image source={require('../assets/images/StoresLogo/BikeHouse.png')}
                         style={styles.storeIcon}/>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.bookmarkButton]}

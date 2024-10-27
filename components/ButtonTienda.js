@@ -2,16 +2,15 @@ import React from "react";
 import { View, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
 
 const categories = [
-    {name: 'fox', image: require('../assets/images/fox.png')},
-    {name: 'onvelo', image: require('../assets/images/onvelo.jpg')},
-    {name: 'cycle', image: require('../assets/images/cyclerwear.png')},
-    {name: 'clemmons', image: require('../assets/images/clemmons.png')},
-    {name: 'trek', image: require('../assets/images/trek.png')},
-    {name: 'bikehouse', image: require('../assets/images/BikeHouse.png')},
-    {name: 'ciclomundo', image: require('../assets/images/ciclomundo.webp')},
-    {name: 'ronin', image: require('../assets/images/ronin.webp')},
-    {name: 'ciclismoel', image: require('../assets/images/ciclismoel.png')},
-    {name: 'mibici', image: require('../assets/images/mibici.png')},
+    {name: 'fox', image: require('../assets/images/StoresLogo/fox.png')},
+    {name: 'onvelo', image: require('../assets/images/StoresLogo/onvelo.jpg')},
+    {name: 'cycle', image: require('../assets/images/StoresLogo/cyclerwear.png')},
+    {name: 'clemmons', image: require('../assets/images/StoresLogo/clemmons.png')},
+    {name: 'trek', image: require('../assets/images/StoresLogo/trek.png')},
+    {name: 'bikehouse', image: require('../assets/images/StoresLogo/BikeHouse.png')},
+    {name: 'ciclomundo', image: require('../assets/images/StoresLogo/ciclomundo.webp')},
+    {name: 'ronin', image: require('../assets/images/StoresLogo/ronin.webp')},
+    {name: 'ciclismoel', image: require('../assets/images/StoresLogo/ciclismoel.png')},
 ];
 
 const ButtonTienda = () => {

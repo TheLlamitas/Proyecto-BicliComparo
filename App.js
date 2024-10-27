@@ -1,14 +1,14 @@
 import  React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import StackNavigator from './navigation/StackNavigator';
+import DrawerNavigator from './navigation/DrawerNavigator';
 import AuthContextProvider from './context/auth-context';
 
 export default function App() {
   return (
     <AuthContextProvider>
       <NavigationContainer>
-        <StackNavigator/>
+        <DrawerNavigator/>
       </NavigationContainer>
     </AuthContextProvider>
   );

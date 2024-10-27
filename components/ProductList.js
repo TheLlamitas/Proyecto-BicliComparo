@@ -4,12 +4,12 @@ import { useNavigation } from "@react-navigation/native";
 
 
 const products = [
-    { id: 1, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/onvelo.jpg') },
-    { id: 2, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/onvelo.jpg') },
-    { id: 3, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/onvelo.jpg') },
-    { id: 4, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/onvelo.jpg') },
-    { id: 5, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/onvelo.jpg') },
-    { id: 6, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/onvelo.jpg') },
+    { id: 1, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
+    { id: 2, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
+    { id: 3, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
+    { id: 4, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
+    { id: 5, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
+    { id: 6, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
 
 
 ];
