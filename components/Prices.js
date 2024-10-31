@@ -5,9 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/auth-context";
 
 
-export default function Prices() {
-
-
+export default function Prices({ title, description, price, originalPrice, storeLogo }) {
     const [isBookmarked, setIsBookmarked] = useState(false);
     const {isLoggedIn} = useContext(AuthContext);
     const navigation = useNavigation();
@@ -38,23 +36,18 @@ export default function Prices() {
     return (
     <View style={styles.container}>
             <View style={styles.centerdeContainer}>
-                <Text style={styles.title}>Bicicleta de Montaña Trek Marlin 7</Text>
-                <Text style={styles.description}>Es ideal para ti si. Buscas una bicicleta de
-                    trail polivalente con mejoras en los componentes más importantes,
-                    pero que no te deje la cuenta corriente a cero. Quieres mejorar tu
-                    técnica en los senderos y necesitas una bicicleta con una geometría
-                    que te inspire confianza.
-                </Text>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.description}>{description}</Text>
             </View>
             <View styles={styles.leftAlignedContainer}>
                 <Text style={styles.offerPriceLabel}>Precio de Oferta</Text>
-                <Text style={styles.strikethroughPrice}>$3.890.000</Text>
-                <Text style={styles.currentPrice}>$2.990.000</Text>
+                <Text style={styles.strikethroughPrice}>${price}</Text>
+                <Text style={styles.currentPrice}>${originalPrice}</Text>
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.storeButton}>
                     <Text style={styles.storeButtonText}>Ir a la tienda</Text>
-                        <Image source={require('../assets/images/StoresLogo/BikeHouse.png')}
+                        <Image source={{ uri: storeLogo }}
                         style={styles.storeIcon}/>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.bookmarkButton]}

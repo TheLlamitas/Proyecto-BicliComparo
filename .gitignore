@@ -37,8 +37,12 @@ yarn-error.*
 # Ignorar firebaseConfig.js
 firebaseConfig.js
 
-# Ignorar la carpeta utils y su contenido
-utils/
 
 # Ignorar auth.js
 auth.js
+
+upload.js
+
+uploadImages.js
+
+db.js

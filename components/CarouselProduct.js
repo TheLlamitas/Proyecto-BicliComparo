@@ -6,20 +6,11 @@ import Swiper from 'react-native-swiper';
 const { width: screenWidth } = Dimensions.get('window');
 
 
-const images = [
-    require('../assets/images/carrusel bicicleta/marlin7-6.webp'),
-    require('../assets/images/carrusel bicicleta/marlin7-7.webp'),
-    require('../assets/images/carrusel bicicleta/marlin7-8.webp'),
-    require('../assets/images/carrusel bicicleta/marlin7-9.webp'),
-    require('../assets/images/carrusel bicicleta/marlin7-1.webp'),
-    require('../assets/images/carrusel bicicleta/marlin7-2.webp'),
-    require('../assets/images/carrusel bicicleta/marlin7-3.webp'),
-    require('../assets/images/carrusel bicicleta/marlin7-4.webp'),
-    require('../assets/images/carrusel bicicleta/marlin7-5.webp'),
-];
+const ImageCarousel = ({ gallery }) => {
+    const galleryUrls = Array.isArray(gallery) 
+        ? gallery 
+        : Object.values(gallery);
 
-
-const ImageCarousel = () => {
     return (
         <View style={styles.carouselContainer}>
             <Swiper
@@ -30,11 +21,12 @@ const ImageCarousel = () => {
                 dotStyle={styles.dot}
                 activeDotStyle={styles.activeDot}
             >
-                {images.map((image, index) => (
-                    <View style={styles.slide} key={index}>
-                        <Image source={image} style={styles.image} />
-                    </View>
-                ))}
+
+            {galleryUrls && galleryUrls.map((url, index) => (
+                <View style={styles.slide} key={index}>
+                    <Image source={{ uri: url }} style={styles.image} />
+                </View>
+            ))}
             </Swiper>
         </View>
     );

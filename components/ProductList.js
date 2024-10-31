@@ -1,37 +1,54 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
-
-const products = [
-    { id: 1, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
-    { id: 2, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
-    { id: 3, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
-    { id: 4, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
-    { id: 5, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
-    { id: 6, name: "Bicicleta de Montaña Trek Marlin 7", price: "$3.000.000", previousPrice: "$4.000.000", image: require('../assets/images/marlin5.webp'), logo: require('../assets/images/StoresLogo/onvelo.jpg') },
-
-
-];
+import { getProducts } from "../utils/db";
 
 
 const ProductList = () => {
     const navigation = useNavigation();
+    const [fetchedProducts, setFetchedProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        async function fetchProducts() {
+            const products = await getProducts();
+            const filteredProducts = products.filter(product => product.previousPrice === 0);
+            setFetchedProducts(filteredProducts);
+            setLoading(false);
+        }
+        fetchProducts();
+    }, []);
+
+    const truncateText = (text, limit = 50) => {
+        return text.length > limit ? text.substring(0, limit) + "..." : text;
+    };
+
+    if (loading) {
+        return (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color="#0000ff" />
+              <Text>Loading restaurants...</Text>
+            </View>
+          );
+    }
 
     return (
         <View style={styles.productList}>
-            {products.map(product => (
-                <TouchableOpacity key={product.id} style={styles.productCard} onPress={() => navigation.navigate('Information')}>
-                    <Image source={product.image} style={styles.productImage} />
-                    <Text style={styles.productName}>{product.name}</Text>
+            {fetchedProducts.length === 0 ? (
+                <Text>No product available</Text>
+            ) : (
+                fetchedProducts.map((product, index) => (
+                    <TouchableOpacity key={index} style={styles.productCard} onPress={() => navigation.navigate('Information', { product })}>
+                    <Image source={{ uri: product.mainImage }} style={styles.productImage} />
+                    <Text style={styles.productName}>{truncateText(product.name)}</Text>
                     <View style={styles.priceContainer}>
-                        <Text style={styles.previousPrice}>{product.previousPrice}</Text>
-                        <Text style={styles.price}>{product.price}</Text>
+                        <Text style={styles.price}>${product.price}</Text>
                     </View>
-                    <Image source={product.logo} style={styles.storeLogo}/>
+                    <Image source={{ uri: product.storeLogo }} style={styles.storeLogo}/>
                 </TouchableOpacity>
-            ))}
+                ))
+            )}
+                
         </View>
     );
 };
@@ -68,12 +85,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         marginBottom: 5,
     },
-    previousPrice: {
-        fontSize: 12,
-        textDecorationLine: 'line-through',
-        color: 'red',
-    },
     price: {
+        paddingTop: 20,
         fontSize: 18,
         color: 'black',
     },
@@ -83,6 +96,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 5,
         right: 5,
+    },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

@@ -1,37 +1,68 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { getProducts } from "../utils/db";
 
 
-const OffertTouchable = ({ product }) => {
+const OffertTouchable = () => {
     const navigation = useNavigation();
+    const [fetchedProducts, setFetchedProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        async function fetchProducts() {
+            const products = await getProducts();
+            const filteredProducts = products.filter(product => product.previousPrice > 0);
+            setFetchedProducts(filteredProducts);
+            setLoading(false);
+        }
+        fetchProducts();
+    }, []);
 
-    const { name, price, strikethroughPrice, storeLogo, description, image } = product;
-
+    if (loading) {
+        return (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#0000ff" />
+            <Text>Loading restaurants...</Text>
+          </View>
+        );
+      }
 
     return (
-        <TouchableOpacity style={styles.touchableContainer} onPress={() => navigation.navigate('Information')}>
-            <Image source={image} style={styles.productImage} />
+        <View style={styles.container}>
+            {fetchedProducts.length === 0 ? (
+            <Text>No restaurants available</Text>
+        ) : (
+            fetchedProducts.map((product, index) => (
+                <TouchableOpacity key={index} style={styles.touchableContainer} onPress={() => navigation.navigate('Information', { product })}>
+            <Image source={{ uri: product.mainImage }} style={styles.productImage} />
             <View style={styles.infoContainer}>
                 <Text style={styles.productName}>
-                    {name.length > 50 ? `${name.substring(0, 50)}...` : name}
+                    {product.name.length > 50 ? `${name.substring(0, 50)}...` : product.name}
                 </Text>
-                <Text style={styles.strikethroughPrice}>{strikethroughPrice}</Text>
+                <Text style={styles.strikethroughPrice}>${product.previousPrice}</Text>
                 <View style={styles.priceLogoContainer}>
-                    <Text style={styles.price}>{price}</Text>
-                    <Image source={storeLogo} style={styles.storeLogo} />
+                    <Text style={styles.price}>${product.price}</Text>
+                    <Image source={{ uri: product.storeLogo }} style={styles.storeLogo} />
                 </View>
                 <Text style={styles.description}>
-                    {description.length > 80 ? `${description.substring(0, 80)}...` : description}
+                    {product.description.length > 80 ? `${product.description.substring(0, 80)}...` : product.description}
                 </Text>
             </View>
         </TouchableOpacity>
+            ))
+        )}
+        </View>
+        
+        
     );
 };
 
-
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'black',
+    },
     touchableContainer: {
         flexDirection: 'row',
         alignItems: 'center',

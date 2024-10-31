@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, FlatList, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import MainHeader from "../components/MainHeader";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import CarouselProduct from "../components/CarouselProduct";
 import Prices from "../components/Prices";
 import OffertList from "../components/OffertList";
@@ -13,6 +13,8 @@ const { width } = Dimensions.get('window');
 
 export default function InformationScreen() {
     const navigation = useNavigation();
+    const route = useRoute();
+    const { product } = route.params;
 
 
     const data = [{ key: 'content' }];
@@ -29,14 +31,41 @@ export default function InformationScreen() {
                             <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                                 <Ionicons name="arrow-back" size={24} color="white" />
                             </TouchableOpacity>
-                            <View style={styles.carouselContainer}>
-                                <CarouselProduct />
+                           
+                            {product ? (
+                            <View style={styles.carouselContainer}>   
+                                <CarouselProduct gallery={product.gallery}/>
+                                <Text>No product data available.</Text>
                             </View>
-                            <Prices />
+                            ) : (
+                                <Text>No product data available.</Text>
+                            )}
+                           
+                            {product ? (
+                                <Prices 
+                                title={product.name}
+                                description={product.description}
+                                price={product.previousPrice}    
+                                originalPrice={product.price}
+                                storeLogo={product.storeLogo}
+                            />
+                            ) : (
+                                <Text>No product data available.</Text>
+                            )}
                             <View style={styles.line} />
                             <Text style={styles.highlightedProducts}>Otras Ofertas</Text>
                             <View style={styles.line} />
-                            <OffertList />
+                            {product ? (
+                                <OffertList 
+                                    title={product.name}
+                                    description={product.description}
+                                    price={product.previousPrice}    
+                                    originalPrice={product.price}
+                                    storeLogo={product.storeLogo}
+                                />
+                            ) : (
+                                <Text>No product data available.</Text>
+                            )}
                         </View>
                     )}
                     keyExtractor={(item) => item.key}

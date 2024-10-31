@@ -3,14 +3,15 @@ import { View, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-nat
 
 const categories = [
     {name: 'fox', image: require('../assets/images/StoresLogo/fox.png')},
-    {name: 'onvelo', image: require('../assets/images/StoresLogo/onvelo.jpg')},
-    {name: 'cycle', image: require('../assets/images/StoresLogo/cyclerwear.png')},
+    {name: 'onvelo', image: require('../assets/images/StoresLogo/pearlizumi.png')},
+    {name: 'cycle', image: require('../assets/images/StoresLogo/knog.webp')},
     {name: 'clemmons', image: require('../assets/images/StoresLogo/clemmons.png')},
     {name: 'trek', image: require('../assets/images/StoresLogo/trek.png')},
-    {name: 'bikehouse', image: require('../assets/images/StoresLogo/BikeHouse.png')},
+    {name: 'bikehouse', image: require('../assets/images/StoresLogo/bikehouse.png')},
     {name: 'ciclomundo', image: require('../assets/images/StoresLogo/ciclomundo.webp')},
     {name: 'ronin', image: require('../assets/images/StoresLogo/ronin.webp')},
     {name: 'ciclismoel', image: require('../assets/images/StoresLogo/ciclismoel.png')},
+    {name: 'bell', image: require('../assets/images/StoresLogo/bell.png')},
 ];
 
 const ButtonTienda = () => {
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     },
     categoryButton: {
         width: '48%',
-        backgroundColor: '#fff',
+        backgroundColor: 'darkred',
         padding: 10,
         marginBottom: 20,
         alignItems: 'center',
