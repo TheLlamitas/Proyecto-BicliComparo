@@ -30,7 +30,7 @@ function MainHeader() {
           <TouchableOpacity style={styles.icon}>
             <Icon name="notifications" size={20} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icon} onPress={() => navigation.openDrawer()}>
+          <TouchableOpacity style={styles.icon}>
             <Icon name="menu" size={20} color="white" />
           </TouchableOpacity>
         </View>

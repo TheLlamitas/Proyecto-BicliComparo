@@ -4,18 +4,15 @@ import { AuthContext } from '../context/auth-context';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
-
 const menuOptions = [
   { name: 'Editar Perfil', icon: 'person', library: 'MaterialIcons' },
   { name: 'Historial', icon: 'book-open', library: 'FontAwesome5' },
-  { name: 'Guardados', icon: 'bookmark', library: 'MaterialIcons' }
+  { name: 'Guardados', icon: 'bookmark', library: 'MaterialIcons' },
 ];
-
 
 function ProfileScreen() {
   const authCtx = useContext(AuthContext);
   const navigation = useNavigation();
-
 
   if (!authCtx.isLoggedIn) {
     return (
@@ -26,30 +23,35 @@ function ProfileScreen() {
     );
   }
 
-
   return (
     <View style={styles.container}>
       <Image source={require('../assets/images/profile-mikasa.jpeg')} style={styles.profileImage} />
       <Text style={styles.emailText}>Correo: {authCtx.email}</Text>
       <View style={styles.optionsContainer}>
-      {menuOptions.map((option, index) => (
-                <TouchableOpacity key={index} style={styles.optionButton}>
-                    {option.library === 'MaterialIcons' ? (
-                        <MaterialIcons name={option.icon} size={24} color='white' style={styles.icon} />
-                    ) : (
-                        <FontAwesome5 name={option.icon} size={24} color='white' style={styles.icon} />
-                    )}
-                    <Text style={styles.optionText}>{option.name}</Text>
-                </TouchableOpacity>
-      ))}
+        {menuOptions.map((option, index) => (
+          <TouchableOpacity key={index} style={styles.optionButton} onPress={() => navigation.navigate("Admin")}>
+            {option.library === 'MaterialIcons' ? (
+              <MaterialIcons name={option.icon} size={24} color='white' style={styles.icon} />
+            ) : (
+              <FontAwesome5 name={option.icon} size={24} color='white' style={styles.icon} />
+            )}
+            <Text style={styles.optionText}>{option.name}</Text>
+          </TouchableOpacity>
+        ))}
+        
+        {authCtx.email === 'admin@gmail.com' && (
+          <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("Admin")}>
+            <MaterialIcons name="admin-panel-settings" size={24} color='white' style={styles.icon} />
+            <Text style={styles.optionText}>Administrador</Text>
+          </TouchableOpacity>
+        )}
       </View>
-        <TouchableOpacity style={styles.logoutButton} onPress={authCtx.logout}>
-          <Text style={styles.logoutButtonText}>Logout</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.logoutButton} onPress={authCtx.logout}>
+        <Text style={styles.logoutButtonText}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -104,6 +106,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
 
 export default ProfileScreen;

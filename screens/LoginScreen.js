@@ -22,7 +22,7 @@ export default function LoginScreen() {
         try {
             const token = await login(email, password);
             authCtx.login(token, email);
-            navigation.navigate('Home');
+            navigation.navigate('InicioTab');
         } catch (error) {
             setError("Error en el inicio de sesión. Verifica tus credenciales.");
             console.error("Error en el inicio de sesión: ", error);

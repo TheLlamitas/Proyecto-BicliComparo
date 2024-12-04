@@ -4,6 +4,7 @@ import TabNavigator from './TabNavigator';
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import InformationScreen from "../screens/InformationScreen"
+import AdminScreen from "../screens/AdminScreen";
 
 
 const Stack = createStackNavigator();
@@ -16,6 +17,7 @@ function StackNavigator() {
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
             <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Information" component={InformationScreen} options={{headerShown: false}}/>
+            <Stack.Screen name="Admin" component={AdminScreen} options={{ title: "Admin" }}/>
         </Stack.Navigator>
     )
 }

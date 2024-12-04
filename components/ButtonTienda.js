@@ -7,7 +7,7 @@ const categories = [
     {name: 'cycle', image: require('../assets/images/StoresLogo/knog.webp')},
     {name: 'clemmons', image: require('../assets/images/StoresLogo/clemmons.png')},
     {name: 'trek', image: require('../assets/images/StoresLogo/trek.png')},
-    {name: 'bikehouse', image: require('../assets/images/StoresLogo/bikehouse.png')},
+    {name: 'bikehouse', image: require('../assets/images/StoresLogo/BikeHouse.png')},
     {name: 'ciclomundo', image: require('../assets/images/StoresLogo/ciclomundo.webp')},
     {name: 'ronin', image: require('../assets/images/StoresLogo/ronin.webp')},
     {name: 'ciclismoel', image: require('../assets/images/StoresLogo/ciclismoel.png')},

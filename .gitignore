@@ -39,12 +39,9 @@ firebaseConfig.js
 
 
 # Ignorar auth.js
-auth.js
 
 upload.js
 
 uploadImages.js
-
-db.js
 
 serviceAccountKey.json
