@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { 
+  View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity, 
+  Image, ScrollView, Vibration 
+} from 'react-native';
 import { addProduct, updateProduct } from '../utils/db';
 import * as ImagePicker from 'expo-image-picker';
+import * as Notifications from 'expo-notifications';
 
 const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
   const [name, setName] = useState('');
@@ -13,14 +17,44 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
   const [mainImageUri, setMainImageUri] = useState('');
   const [storeLogoUri, setStoreLogoUri] = useState('');
   const [galleryUris, setGalleryUris] = useState([]);
+  const [hasPermission, setHasPermission] = useState(null);
 
-  const requestPermission = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== 'granted') {
-      Alert.alert('Permiso Denegado', 'Se necesita acceso a la galería para seleccionar imágenes.');
-      return false;
-    }
-    return true;
+  useEffect(() => {
+    const requestPermissions = async () => {
+      const mediaPermission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      setHasPermission(mediaPermission.status === 'granted');
+      if (mediaPermission.status !== 'granted') {
+        Alert.alert('Permiso Denegado', 'Se necesita acceso a la galería para seleccionar imágenes.');
+      }
+
+      const notificationsPermission = await Notifications.requestPermissionsAsync();
+      if (notificationsPermission.status !== 'granted') {
+        Alert.alert('Permiso Denegado', 'Se necesitan permisos de notificación para esta función.');
+      }
+    };
+
+    requestPermissions();
+  }, []);
+
+  // Configuración del manejador de notificaciones
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    }),
+  });
+
+  const handleTestNotification = async (productName) => {
+    Vibration.vibrate([0, 250, 250, 250]); // Patrón de vibración
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: 'Nueva oferta',
+        body: `¡${productName} tiene un nuevo precio especial!`,
+        data: { productName },
+      },
+      trigger: null, 
+    });
   };
 
   useEffect(() => {
@@ -35,21 +69,27 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
       setStoreLogoUri(selectedProduct.storeLogoUri || '');
       setGalleryUris(selectedProduct.galleryUris || []);
     } else {
-      setName('');
-      setCategory('');
-      setDescription('');
-      setPrice('');
-      setPreviousPrice('');
-      setStore('');
-      setMainImageUri('');
-      setStoreLogoUri('');
-      setGalleryUris([]);
+      clearFields();
     }
   }, [selectedProduct]);
 
+  const clearFields = () => {
+    setName('');
+    setCategory('');
+    setDescription('');
+    setPrice('');
+    setPreviousPrice('');
+    setStore('');
+    setMainImageUri('');
+    setStoreLogoUri('');
+    setGalleryUris([]);
+  };
+
   const selectImage = async (setImageUri) => {
-    const hasPermission = await requestPermission();
-    if (!hasPermission) return;
+    if (!hasPermission) {
+      Alert.alert('Permiso Denegado', 'No tienes acceso a la galería.');
+      return;
+    }
 
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -57,7 +97,7 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
       quality: 1,
     });
 
-    if (!result.canceled && result.assets && result.assets.length > 0) {
+    if (!result.canceled && result.assets.length > 0) {
       setImageUri(result.assets[0].uri);
     } else {
       Alert.alert('Error', 'No se seleccionó ninguna imagen.');
@@ -65,8 +105,10 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
   };
 
   const selectMultipleImages = async () => {
-    const hasPermission = await requestPermission();
-    if (!hasPermission) return;
+    if (!hasPermission) {
+      Alert.alert('Permiso Denegado', 'No tienes acceso a la galería.');
+      return;
+    }
 
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -74,7 +116,7 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
       quality: 1,
     });
 
-    if (!result.canceled && result.assets && result.assets.length > 0) {
+    if (!result.canceled && result.assets.length > 0) {
       const selectedUris = result.assets.map((item) => item.uri);
       setGalleryUris((prev) => [...prev, ...selectedUris]);
     } else {
@@ -87,7 +129,7 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
       Alert.alert('Error', 'Por favor, completa todos los campos requeridos e incluye las imágenes.');
       return;
     }
-  
+
     const productData = {
       name,
       category,
@@ -96,7 +138,7 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
       previousPrice: parseFloat(previousPrice) || 0,
       store,
     };
-  
+
     try {
       if (selectedProduct) {
         await updateProduct(selectedProduct.id, productData, mainImageUri, storeLogoUri, galleryUris);
@@ -109,9 +151,14 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
         });
         Alert.alert('Éxito', `Producto "${name}" añadido correctamente.`);
       }
-  
-      clearSelection();
+
+      if (parseFloat(previousPrice) > 0) {
+        handleTestNotification(name);
+      }
+
+      clearFields();
       fetchProducts();
+      clearSelection();
     } catch (error) {
       console.error(error);
       Alert.alert('Error', 'No se pudo procesar la solicitud. Inténtalo de nuevo.');
@@ -121,44 +168,12 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{selectedProduct ? 'Actualizar Producto' : 'Agregar Producto'}</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Nombre del producto"
-        value={name}
-        onChangeText={setName}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Categoría"
-        value={category}
-        onChangeText={setCategory}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Descripción"
-        value={description}
-        onChangeText={setDescription}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Precio actual"
-        keyboardType="numeric"
-        value={price}
-        onChangeText={setPrice}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Precio anterior (opcional)"
-        keyboardType="numeric"
-        value={previousPrice}
-        onChangeText={setPreviousPrice}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Nombre de la tienda"
-        value={store}
-        onChangeText={setStore}
-      />
+      <TextInput style={styles.input} placeholder="Nombre del producto" value={name} onChangeText={setName} />
+      <TextInput style={styles.input} placeholder="Categoría" value={category} onChangeText={setCategory} />
+      <TextInput style={styles.input} placeholder="Descripción" value={description} onChangeText={setDescription} />
+      <TextInput style={styles.input} placeholder="Precio actual" keyboardType="numeric" value={price} onChangeText={setPrice} />
+      <TextInput style={styles.input} placeholder="Precio anterior (opcional)" keyboardType="numeric" value={previousPrice} onChangeText={setPreviousPrice} />
+      <TextInput style={styles.input} placeholder="Nombre de la tienda" value={store} onChangeText={setStore} />
 
       <Text style={styles.label}>Imagen Principal</Text>
       <TouchableOpacity onPress={() => selectImage(setMainImageUri)} style={styles.imagePicker}>
@@ -180,33 +195,17 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
         ))}
       </ScrollView>
 
-      <Button
-        title={selectedProduct ? 'Actualizar Producto' : 'Agregar Producto'}
-        onPress={handleAddOrUpdateProduct}
-      />
+      <Button title={selectedProduct ? 'Actualizar Producto' : 'Agregar Producto'} onPress={handleAddOrUpdateProduct} />
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { marginBottom: 20, padding: 10 },
+  container: { padding: 10 },
   title: { fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginBottom: 15 },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 10,
-  },
+  input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 5, padding: 10, marginBottom: 10 },
   label: { fontWeight: 'bold', marginVertical: 10 },
-  imagePicker: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
-    alignItems: 'center',
-    marginBottom: 10,
-  },
+  imagePicker: { borderWidth: 1, borderColor: '#ccc', borderRadius: 5, padding: 10, alignItems: 'center', marginBottom: 10 },
   imagePreview: { width: 100, height: 100, borderRadius: 5 },
   galleryImagePreview: { width: 80, height: 80, marginHorizontal: 5, borderRadius: 5 },
 });

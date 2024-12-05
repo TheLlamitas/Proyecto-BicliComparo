@@ -40,9 +40,9 @@ const OffertTouchable = () => {
                     <Text style={styles.productName}>
                         {product.name.length > 50 ? `${name.substring(0, 50)}...` : product.name}
                     </Text>
-                    <Text style={styles.strikethroughPrice}>${product.previousPrice} COP</Text>
+                    <Text style={styles.strikethroughPrice}>${product.previousPrice}</Text>
                     <View style={styles.priceLogoContainer}>
-                        <Text style={styles.price}>${product.price} COP</Text>
+                        <Text style={styles.price}>${product.price}</Text>
                         <Image source={{ uri: product.storeLogo }} style={styles.storeLogo} />
                     </View>
                     <Text style={styles.description}>

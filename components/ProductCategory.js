@@ -55,8 +55,8 @@ const ProductCategory = () => {
                             <Image source={{ uri: product.mainImage }} style={styles.productImage} />
                             <Text style={styles.productName}>{truncateText(product.name)}</Text>
                             <View style={styles.priceContainer}>
-                                <Text style={styles.previousPrice}>${product.previousPrice} COP</Text>
-                                <Text style={styles.price}>${product.price} COP</Text>
+                                <Text style={styles.previousPrice}>${product.previousPrice}</Text>
+                                <Text style={styles.price}>${product.price}</Text>
                             </View>
                             <Image source={{ uri: product.storeLogo }} style={styles.storeLogo} />
                         </TouchableOpacity>
