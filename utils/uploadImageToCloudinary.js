@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const CLOUD_NAME = "dhl1xkzwc"; 
-const UPLOAD_PRESET = "my_upload_preset"; 
+const CLOUD_NAME = ""; 
+const UPLOAD_PRESET = ""; 
 
 export const uploadImageToCloudinary = async (imageUri) => {
   try {
