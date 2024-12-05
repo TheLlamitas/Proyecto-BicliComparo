@@ -13,6 +13,7 @@ const categories = [
     {name: 'ronin', image: require('../assets/images/StoresLogo/ronin.webp')},
     {name: 'ciclismoel', image: require('../assets/images/StoresLogo/ciclismoel.png')},
     {name: 'bell', image: require('../assets/images/StoresLogo/bell.png')},
+    {name: 'cyclewear', image: require('../assets/images/StoresLogo/cyclewear.webp')},
 ];
 
 const ButtonTienda = () => {

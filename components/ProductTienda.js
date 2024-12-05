@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, ActivityIndicator, Dimensions } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { getProducts } from "../utils/db"; // Asumo que esta función te trae los productos
+import { getProducts } from "../utils/db"; 
 
 const { width } = Dimensions.get("window");
 
@@ -16,6 +16,7 @@ const storeDetails = [
   { name: 'ronin', logo: require('../assets/images/StoresLogo/ronin.webp'), description: 'Specialized bike shop catering to all levels.' },
   { name: 'ciclismoel', logo: require('../assets/images/StoresLogo/ciclismoel.png'), description: 'Cycling store for enthusiasts and experts.' },
   { name: 'bell', logo: require('../assets/images/StoresLogo/bell.png'), description: 'Popular store for helmets and cycling accessories.' },
+  { name: 'cyclewear', logo: require('../assets/images/StoresLogo/cyclewear.webp'), description: 'Cyclewear es una tienda virtual del mundo de bicicletas...' },
 ];
 
 const ProductCategory = () => {
