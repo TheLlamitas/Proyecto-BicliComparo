@@ -41,8 +41,8 @@ export default function Prices({ title, description, price, originalPrice, store
             </View>
             <View styles={styles.leftAlignedContainer}>
                 <Text style={styles.offerPriceLabel}>Precio de Oferta</Text>
-                <Text style={styles.strikethroughPrice}>${price}</Text>
-                <Text style={styles.currentPrice}>${originalPrice}</Text>
+                <Text style={styles.strikethroughPrice}>${price} COP</Text>
+                <Text style={styles.currentPrice}>${originalPrice} COP</Text>
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.storeButton}>

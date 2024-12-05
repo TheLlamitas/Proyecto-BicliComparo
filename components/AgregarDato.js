@@ -87,7 +87,7 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
       Alert.alert('Error', 'Por favor, completa todos los campos requeridos e incluye las imágenes.');
       return;
     }
-
+  
     const productData = {
       name,
       category,
@@ -96,10 +96,10 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
       previousPrice: parseFloat(previousPrice) || 0,
       store,
     };
-
+  
     try {
       if (selectedProduct) {
-        await updateProduct(selectedProduct.id, productData, mainImageUri);
+        await updateProduct(selectedProduct.id, productData, mainImageUri, storeLogoUri, galleryUris);
         Alert.alert('Éxito', `Producto "${name}" actualizado correctamente.`);
       } else {
         await addProduct(productData, {
@@ -109,7 +109,7 @@ const AgregarDato = ({ fetchProducts, selectedProduct, clearSelection }) => {
         });
         Alert.alert('Éxito', `Producto "${name}" añadido correctamente.`);
       }
-
+  
       clearSelection();
       fetchProducts();
     } catch (error) {

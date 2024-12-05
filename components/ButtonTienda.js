@@ -1,5 +1,6 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 
 const categories = [
     {name: 'fox', image: require('../assets/images/StoresLogo/fox.png')},
@@ -15,11 +16,18 @@ const categories = [
 ];
 
 const ButtonTienda = () => {
+    const navigation = useNavigation();
+    const handlePress = (storeName) => {
+        navigation.navigate("Tienda", { storeName })
+    }
     return (
         <View style={styles.container}>
             <View style={styles.categoriesContainer}>
                 {categories.map((category, index) => (
-                    <TouchableOpacity key={index} style={styles.categoryButton}>
+                    <TouchableOpacity 
+                    key={index} 
+                    style={styles.categoryButton}
+                    onPress={() => handlePress(category.name)}>
                         <Image
                             source={category.image}
                             style={styles.categoryImage}

@@ -5,6 +5,8 @@ import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import InformationScreen from "../screens/InformationScreen"
 import AdminScreen from "../screens/AdminScreen";
+import CategoriaScreen from "../screens/CategoriaScreen";
+import TiendaScreen from "../screens/TiendaScreen";
 
 
 const Stack = createStackNavigator();
@@ -18,6 +20,8 @@ function StackNavigator() {
             <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Information" component={InformationScreen} options={{headerShown: false}}/>
             <Stack.Screen name="Admin" component={AdminScreen} options={{ title: "Admin" }}/>
+            <Stack.Screen name="Categoria" component={CategoriaScreen} options={{headerShown: false}}/>
+            <Stack.Screen name="Tienda" component={TiendaScreen} options={{headerShown: false}}/>
         </Stack.Navigator>
     )
 }

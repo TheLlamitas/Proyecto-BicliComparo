@@ -1,7 +1,7 @@
 import axios from "axios";
 import { uploadImageToCloudinary } from "../utils/uploadImageToCloudinary"; 
 
-const BACKEND_URL = "Su realtime database";
+const BACKEND_URL = "";
 
 const getProducts = async () => {
   const response = await axios.get(`${BACKEND_URL}products.json`);

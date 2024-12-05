@@ -1,22 +1,27 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons'; 
+import { useNavigation } from "@react-navigation/native";
 
 const categories = [
     { name: 'Bicicletas', icon: 'directions-bike', library: 'MaterialIcons' },
-    { name: 'Accesorios', icon: 'hand-holding-water', library: 'FontAwesome5' }, // Cambié a un guante
-    { name: 'Ropas', icon: 'tshirt', library: 'FontAwesome5' }, // Ícono de camiseta
-    { name: 'Zapatos', icon: 'shoe-prints', library: 'FontAwesome5' }, // Ícono de zapato
+    { name: 'Accesorios', icon: 'hand-holding-water', library: 'FontAwesome5' },
+    { name: 'Ropas', icon: 'tshirt', library: 'FontAwesome5' },
+    { name: 'Zapatos', icon: 'shoe-prints', library: 'FontAwesome5' }, 
     { name: 'Repuestos', icon: 'settings', library: 'MaterialIcons' },
     { name: 'Talleres', icon: 'construction', library: 'MaterialIcons' },
 ];
 
 const ButtonCategoria = () => {
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <View style={styles.categoriesContainer}>
                 {categories.map((category, index) => (
-                    <TouchableOpacity key={index} style={styles.categoryButton}>
+                    <TouchableOpacity 
+                        key={index} 
+                        style={styles.categoryButton} 
+                        onPress={() => navigation.navigate('Categoria', { category: category.name.toLowerCase() })}>
                         {category.library === 'MaterialIcons' ? (
                             <MaterialIcons
                                 name={category.icon}

@@ -10,7 +10,7 @@ const { width } = Dimensions.get('window');
 export default function Categorias () {
     return (
         <View style={styles.safeArea}>
-                    <MainHeader />
+            <MainHeader />
             <ScrollView contentContainerStyle={styles.scrollViewContent}>
                 <Text style={styles.title}>Categoría</Text>
                 <View style={styles.line} />
