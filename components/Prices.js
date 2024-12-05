@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthContext } from "../context/auth-context";
 import { SavedProductsContext } from "../context/saved-products-context";
 
-export default function Prices({ name, description, previousPrice, price, storeLogo }) {
+export default function Prices({ name, description, previousPrice, price, storeLogo, mainImage, gallery }) {
     const [isBookmarked, setIsBookmarked] = useState(false);
     const { isLoggedIn } = useContext(AuthContext);
     const { addProduct, removeProduct, savedProducts } = useContext(SavedProductsContext);
@@ -43,8 +43,8 @@ export default function Prices({ name, description, previousPrice, price, storeL
                         previousPrice,
                         price,
                         storeLogo,
-                        mainImage: product ? product.mainImage : '', 
-                        gallery: product ? product.gallery : [], 
+                        mainImage, 
+                        gallery, 
                     };
                     addProduct(product);
                     setIsBookmarked(true);

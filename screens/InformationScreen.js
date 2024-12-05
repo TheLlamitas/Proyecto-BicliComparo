@@ -48,6 +48,8 @@ export default function InformationScreen() {
                                 previousPrice={product.previousPrice}    
                                 price={product.price}
                                 storeLogo={product.storeLogo}
+                                mainImage={product.mainImage}
+                                gallery={product.gallery}
                             />
                             ) : (
                                 <Text>No product data available.</Text>
