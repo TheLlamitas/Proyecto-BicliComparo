@@ -1,8 +1,7 @@
 import axios from "axios";
 import { Alert } from "react-native";
 
-
-const apiKey = '';
+const apiKey = 'AIzaSyAykhzZMjrRq1GryI0qMjxlNdFsgg792Hg';
 
 async function autenticateregister(mode, email, password){
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;

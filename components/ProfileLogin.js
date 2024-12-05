@@ -29,7 +29,7 @@ function ProfileScreen() {
       <Text style={styles.emailText}>Correo: {authCtx.email}</Text>
       <View style={styles.optionsContainer}>
         {menuOptions.map((option, index) => (
-          <TouchableOpacity key={index} style={styles.optionButton} onPress={() => navigation.navigate("Admin")}>
+          <TouchableOpacity key={index} style={styles.optionButton} onPress={() => navigation.navigate('Guardados')}>
             {option.library === 'MaterialIcons' ? (
               <MaterialIcons name={option.icon} size={24} color='white' style={styles.icon} />
             ) : (

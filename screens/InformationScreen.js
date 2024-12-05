@@ -43,10 +43,10 @@ export default function InformationScreen() {
                            
                             {product ? (
                                 <Prices 
-                                title={product.name}
+                                name={product.name}
                                 description={product.description}
-                                price={product.previousPrice}    
-                                originalPrice={product.price}
+                                previousPrice={product.previousPrice}    
+                                price={product.price}
                                 storeLogo={product.storeLogo}
                             />
                             ) : (
@@ -57,10 +57,10 @@ export default function InformationScreen() {
                             <View style={styles.line} />
                             {product ? (
                                 <OffertList 
-                                    title={product.name}
+                                    name={product.name}
                                     description={product.description}
-                                    price={product.previousPrice}    
-                                    originalPrice={product.price}
+                                    previousPrice={product.previousPrice}    
+                                    price={product.price}
                                     storeLogo={product.storeLogo}
                                 />
                             ) : (

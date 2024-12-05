@@ -34,22 +34,22 @@ const OffertTouchable = () => {
             <Text>No restaurants available</Text>
         ) : (
             fetchedProducts.map((product, index) => (
-                <TouchableOpacity key={index} style={styles.touchableContainer} onPress={() => navigation.navigate('Information', { product })}>
-            <Image source={{ uri: product.mainImage }} style={styles.productImage} />
-            <View style={styles.infoContainer}>
-                <Text style={styles.productName}>
-                    {product.name.length > 50 ? `${name.substring(0, 50)}...` : product.name}
-                </Text>
-                <Text style={styles.strikethroughPrice}>${product.previousPrice} COP</Text>
-                <View style={styles.priceLogoContainer}>
-                    <Text style={styles.price}>${product.price} COP</Text>
-                    <Image source={{ uri: product.storeLogo }} style={styles.storeLogo} />
+            <TouchableOpacity key={index} style={styles.touchableContainer} onPress={() => navigation.navigate('Information', { product })}>
+                <Image source={{ uri: product.mainImage }} style={styles.productImage} />
+                <View style={styles.infoContainer}>
+                    <Text style={styles.productName}>
+                        {product.name.length > 50 ? `${name.substring(0, 50)}...` : product.name}
+                    </Text>
+                    <Text style={styles.strikethroughPrice}>${product.previousPrice} COP</Text>
+                    <View style={styles.priceLogoContainer}>
+                        <Text style={styles.price}>${product.price} COP</Text>
+                        <Image source={{ uri: product.storeLogo }} style={styles.storeLogo} />
+                    </View>
+                    <Text style={styles.description}>
+                        {product.description.length > 80 ? `${product.description.substring(0, 80)}...` : product.description}
+                    </Text>
                 </View>
-                <Text style={styles.description}>
-                    {product.description.length > 80 ? `${product.description.substring(0, 80)}...` : product.description}
-                </Text>
-            </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
             ))
         )}
         </View>
